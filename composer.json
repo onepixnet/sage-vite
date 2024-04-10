@@ -15,6 +15,11 @@
   "support": {
     "issues": "https://github.com/onepixnet/sage-vite/issues"
   },
+  "scripts": {
+    "phpcs": "php ./vendor/bin/phpcs ./app ./functions.php ./index.php --standard=PSR12 --cache -p -s --colors --report=summary --exclude=Generic.Files.LineLength",
+    "phpcs:full": "php ./vendor/bin/phpcs ./app ./functions.php ./index.php --standard=PSR12 --cache -p -s --colors --exclude=Generic.Files.LineLength",
+    "phpcs:fix": "php ./vendor/bin/phpcbf ./app ./functions.php ./index.php --standard=PSR12 --cache -p -s --colors --exclude=Generic.Files.LineLength"
+  },
   "autoload": {
     "psr-4": {
       "App\\": "app/"
@@ -25,7 +30,8 @@
     "roots/acorn": "^4.2"
   },
   "require-dev": {
-    "laravel/pint": "^1.13"
+    "laravel/pint": "^1.13",
+    "squizlabs/php_codesniffer": "^3.9"
   },
   "suggest": {
     "log1x/sage-directives": "A collection of useful Blade directives for WordPress and Sage (^1.0)."
