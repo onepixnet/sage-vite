@@ -1,5 +1,7 @@
 <?php
 
+use function Roots\bootloader;
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
@@ -29,7 +31,7 @@ require $composer;
 |
 */
 
-if (! function_exists('\Roots\bootloader')) {
+if (!function_exists('\Roots\bootloader')) {
     wp_die(
         __('You need to install Acorn to use this theme.', 'sage'),
         '',
@@ -40,7 +42,7 @@ if (! function_exists('\Roots\bootloader')) {
     );
 }
 
-\Roots\bootloader()->boot();
+bootloader()->boot();
 
 /*
 |--------------------------------------------------------------------------
@@ -54,9 +56,9 @@ if (! function_exists('\Roots\bootloader')) {
 |
 */
 
-collect(['setup', 'filters'])
+collect(['setup', 'filters', 'helpers', 'medias'])
     ->each(function ($file) {
-        if (! locate_template($file = "app/{$file}.php", true, true)) {
+        if (!locate_template($file = "app/{$file}.php", true, true)) {
             wp_die(
                 /* translators: %s is replaced with the relative file path */
                 sprintf(__('Error locating <code>%s</code> for inclusion.', 'sage'), $file)
