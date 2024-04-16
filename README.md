@@ -85,9 +85,9 @@ themes/your-theme-name/   # → Root of your Sage based theme
 ├── resources/            # → Theme assets and templates
 │   ├── fonts/            # → Theme fonts
 │   ├── images/           # → Theme images
+│       ├── icons/        # → Theme icons
 │   ├── scripts/          # → Theme scripts
 │   ├── styles/           # → Theme styles
-│   ├── svg/              # → Theme svgs
 │   └── views/            # → Theme templates
 │       ├── components/   # → Component templates
 │       ├── forms/        # → Form templates
