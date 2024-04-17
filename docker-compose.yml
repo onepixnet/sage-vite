@@ -1,0 +1,64 @@
+version: '3.9'
+
+networks:
+  app-network:
+    driver: bridge
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql_${APP_NAME}
+    profiles:
+      - local
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_NAME} 
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_HOST: "%"
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/mysql/run:/var/lib/mysql
+    networks:
+      - app-network
+
+  bedrock:
+    build:
+      context: docker/bedrock
+    container_name: bedrock_${APP_NAME}
+    user: "${USER}:${GROUP}"
+    profiles:
+      - local
+    restart: always
+    working_dir: /var/www
+    env_file: .env
+    environment:
+      DB_PORT: ${DB_PORT:-3306}
+      DB_HOST: ${DB_HOST}
+    volumes:
+      - ./:/var/www/themes/main
+    ports:
+      - 80:80
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin_${APP_NAME}
+    restart: always
+    profiles:
+      - local
+    depends_on:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    ports:
+      - 8081:80
+    networks:
+      - app-network
