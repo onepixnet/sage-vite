@@ -13,6 +13,19 @@ WordPress starter theme with block editor support and Vite builder.
 - [Node.js](http://nodejs.org/) >= 18.0.0
 - [Yarn](https://yarnpkg.com/en/docs/install)
 
+## Running with docker
+
+# First launch
+```shell
+$ cp .env.example .env
+$ sudo docker compose build
+$ sudo docker compose up
+```
+# Next launches
+```shell
+$ sudo docker compose start
+```
+
 ## Theme installation
 
 Install Sage using Composer from your WordPress themes directory (replace `theme-name` below with the name of
