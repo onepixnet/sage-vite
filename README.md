@@ -15,13 +15,13 @@ WordPress starter theme with block editor support and Vite builder.
 
 ## Running with docker
 
-# First launch
+### First launch
 ```shell
 $ cp .env.example .env
 $ sudo docker compose build
 $ sudo docker compose up
 ```
-# Next launches
+### Next launches
 ```shell
 $ sudo docker compose start
 ```
